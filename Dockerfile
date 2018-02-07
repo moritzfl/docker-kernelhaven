@@ -11,7 +11,12 @@ RUN apt-get update \
         build-essential \
         libelf-dev \
         bc \
-        wget
+        wget \
+        libxml2 \
+        libxslt1.1 \
+        libarchive13 \
+        libssl1.0.0 \
+        libcurl3
 
 WORKDIR /data
 

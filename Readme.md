@@ -20,9 +20,9 @@ Prerequisites: [install docker](https://docs.docker.com/engine/installation/)
 Initially you will have to run
 
 ```
-docker run -v /path/on/host:/data --name kernelhaven moritzf/kernelhaven:latest
+docker run --memory=64G -v /path/on/host:/data --name kernelhaven moritzf/kernelhaven:latest
 ```
-
+(Replace ```--memory=64G``` with your desired memory limit for the container)
 (Replace ```/path/on/host``` with valid path on your host machine)
 
 Any subsequent runs can be started with the following command:

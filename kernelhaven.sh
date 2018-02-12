@@ -31,7 +31,17 @@ file="/data/autoupdate-plugins.txt"
 cat $file | egrep -v '^#' | xargs wget -N
 
 cd /data
-echo '*** Running KernelHaven ...'
-java -jar KernelHaven.jar configuration.properties
+
+MAX_RAM=$(cgget -nvr memory.limit_in_bytes /)
+if [ $MAX_RAM -le 137438953472 ] ; then
+    JVM_MIN_HEAP=$(printf "%.0f" $(echo "${MAX_RAM} * 0.2" | bc))
+    JVM_MAX_HEAP=$(printf "%.0f" $(echo "${MAX_RAM} * 0.8" | bc))
+    
+    echo '*** Running KernelHaven ...'
+    exec java "-Xms${JVM_MIN_HEAP}" "-Xmx${JVM_MAX_HEAP}" -jar KernelHaven.jar configuration.properties
+else
+    echo "Please specify the amount of memory to be used for the docker container (eg. docker run --memory=64G ...)"
+    exit 1
+fi
 
 exit 0

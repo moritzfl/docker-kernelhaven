@@ -11,6 +11,7 @@ RUN apt-get update \
         build-essential \
         libelf-dev \
         bc \
+        cgroup-bin \
         wget \
         libxml2 \
         libxslt1.1 \

@@ -1,13 +1,15 @@
 #!/bin/sh -e
 #
-# Script to allow for data-persistence in the /data-directory and run fiduswriter
+# Script to allow for data-persistence in the /data-directory and run kernelhaven
 
 echo "*** Running as user $(whoami) ..."
 
 mkdir /data
 mkdir /data/plugins
 
-# Handle fiduswriter.sql
+# Handle the autoupdate files. If they do not exist, copy templates
+# Users can deactivate autoupdate by removing entries from the files.
+# A deletion of the autoupdate files will however only result in the recreation of thos efiles.
 if [ ! -f /data/autoupdate-root.txt ]; then
     echo "autoupdate-root.txt did not exist, creating default file"
     cp /scripts/autoupdate-root.txt /data/autoupdate-root.txt
